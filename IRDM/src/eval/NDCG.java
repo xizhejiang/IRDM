@@ -66,7 +66,7 @@ public class NDCG {
 		double dcg = 0;
 		double idcg = 0;
 		double total_NDCG=0;
-		int relevent=0;
+		int relevant=0;
 		int index =0;
 		/**
 		 * store top 100 files' records for each topic
@@ -79,14 +79,14 @@ public class NDCG {
 			ArrayList<Result> result_idcg=entry.getValue();
 			for(Result result_entry: entry.getValue()){
 				if(check_id_match_topic(all_cache,result_entry.getTopic_no(),result_entry.getDocument_id())){
-					relevent=all_cache.get(result_entry.getDocument_id()).get(result_entry.getTopic_no());
+					relevant=all_cache.get(result_entry.getDocument_id()).get(result_entry.getTopic_no());
 				}else{
-					relevent=0;
+					relevant=0;
 				}
 				if(result_entry.getDocument_rank()==0){
-					dcg=relevent;
+					dcg=relevant;
 				}else{
-					dcg+=relevent* (Math.log(2) / Math.log(result_entry.getDocument_rank()+1));
+					dcg+=relevant* (Math.log(2) / Math.log(result_entry.getDocument_rank()+1));
 				}
 			}
 			/**
@@ -114,14 +114,14 @@ public class NDCG {
 			index =0;
 			for(Result result_entry: result_idcg){
 				if(check_id_match_topic(all_cache,result_entry.getTopic_no(),result_entry.getDocument_id())){
-					relevent=all_cache.get(result_entry.getDocument_id()).get(result_entry.getTopic_no());
+					relevant=all_cache.get(result_entry.getDocument_id()).get(result_entry.getTopic_no());
 				}else{
-					relevent=0;
+					relevant=0;
 				}
 				if(index==0){
-					idcg=relevent;
+					idcg=relevant;
 				}else{
-					idcg+=relevent* (Math.log(2) / Math.log(index+1));
+					idcg+=relevant* (Math.log(2) / Math.log(index+1));
 				}
 				index++;
 				//result_count++;
